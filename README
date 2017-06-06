@@ -1,0 +1,11 @@
+
+`
+# Download the Docker image and show the help text to make sure it works.
+docker run --rm -v `pwd`:/ne/input -it alexjc/neural-enhance --help
+
+# Setup the alias. Put this in your .bashrc or .zshrc file so it's available at startup.
+alias enhance='function ne() { docker run --rm -v "$(pwd)/`dirname ${@:$#}`":/ne/input -it alexjc/neural-enhance ${@:1:$#-1} "input/`basename ${@:$#}`"; }; ne'
+
+# Now run any of the examples above using this alias, without the `.py` extension.
+enhance --zoom=1 --model=repair test.png
+`
